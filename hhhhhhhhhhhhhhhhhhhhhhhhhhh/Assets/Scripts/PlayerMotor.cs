@@ -6,12 +6,12 @@ public class PlayerMotor : MonoBehaviour
 {
     [SerializeField] Transform playerCamera = null;
     [SerializeField] GameObject spawnPoint = null;
-    [SerializeField] float mouseSensitivity = 3.5f;
     [SerializeField] float walkSpeed = 6.0f;
     [SerializeField] float gravity = -13.0f;
     [SerializeField] [Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f;
     [SerializeField] [Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
-
+    [SerializeField] GameSettings settings;
+    [SerializeField] float mouseSensitivity = 3.5f;
     [SerializeField] bool lockCursor = true;
 
     float cameraPitch = 0.0f;
@@ -27,6 +27,7 @@ public class PlayerMotor : MonoBehaviour
 
     void Start()
     {
+        mouseSensitivity = settings.mouseSenstivity;
         controller = GetComponent<CharacterController>();
         if (lockCursor)
         {
