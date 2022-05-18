@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMotor : MonoBehaviour
 {
     [SerializeField] Transform playerCamera = null;
     [SerializeField] GameObject spawnPoint = null;
+    
     [SerializeField] float walkSpeed = 6.0f;
     [SerializeField] float gravity = -13.0f;
     [SerializeField] [Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f;
     [SerializeField] [Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
     [SerializeField] GameSettings settings;
     [SerializeField] float mouseSensitivity = 3.5f;
-    [SerializeField] bool lockCursor = true;
 
     float cameraPitch = 0.0f;
     float velocityY = 0.0f;
+    public GameObject menu;
+    public bool menuOpen { get; private set; }
+    bool lockCursor = true;
     CharacterController controller = null;
 
 
@@ -27,13 +31,11 @@ public class PlayerMotor : MonoBehaviour
 
     void Start()
     {
-        mouseSensitivity = settings.mouseSenstivity;
+        menu = GameObject.Find("Menu");
+        menu.SetActive(false);
+        menuOpen = false;
         controller = GetComponent<CharacterController>();
-        if (lockCursor)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+
     }
 
     void Update()
@@ -41,6 +43,12 @@ public class PlayerMotor : MonoBehaviour
         UpdateMouseLook();
         UpdateMovement();
         checkInBounds();
+        if (Input.GetKeyDown("escape"))
+        {
+            menuOpen = menuOpen ? false : true;
+            menu.SetActive(menuOpen);
+        }
+
     }
 
     void checkInBounds()
@@ -52,6 +60,19 @@ public class PlayerMotor : MonoBehaviour
     }
     void UpdateMouseLook()
     {
+        mouseSensitivity = settings.mouseSenstivity;
+        if (lockCursor && !menuOpen)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Application.ForceCrash(0);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            return;
+        }
         Vector2 targetMouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
         currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);

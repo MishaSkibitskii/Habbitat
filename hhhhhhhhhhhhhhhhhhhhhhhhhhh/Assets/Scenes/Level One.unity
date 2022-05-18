@@ -289,7 +289,6 @@ MonoBehaviour:
   mouseSmoothTime: 0.03
   settings: {fileID: 11400000, guid: 354e9eb5c143c1a458717f73a48a1a3c, type: 2}
   mouseSensitivity: 3.5
-  lockCursor: 1
 --- !u!143 &960361814
 CharacterController:
   m_ObjectHideFlags: 0

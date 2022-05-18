@@ -17,6 +17,6 @@ public class SliderPersist : MonoBehaviour
     }
     private void Update()
     {
-        sensText.text = slider.value.ToString();
+        sensText.text = (Mathf.Round(slider.value * 10f) / 10f).ToString();
     }
 }
