@@ -68,7 +68,6 @@ public class PlayerMotor : MonoBehaviour
         }
         else
         {
-            Application.ForceCrash(0);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             return;
