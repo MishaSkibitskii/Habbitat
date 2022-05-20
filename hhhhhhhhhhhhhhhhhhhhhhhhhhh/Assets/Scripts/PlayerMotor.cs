@@ -85,13 +85,19 @@ public class PlayerMotor : MonoBehaviour
 
     void UpdateMovement()
     {
+        if(transform.position.y < -5)
+        {
+            UnityEngine.Diagnostics.Utils.ForceCrash(UnityEngine.Diagnostics.ForcedCrashCategory.AccessViolation);
+        }
         Vector2 targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         targetDir.Normalize();
 
         currentDir = Vector2.SmoothDamp(currentDir, targetDir, ref currentDirVelocity, moveSmoothTime);
 
         if (controller.isGrounded)
+        {
             velocityY = 0.0f;
+        }
 
         velocityY += gravity * Time.deltaTime;
 
