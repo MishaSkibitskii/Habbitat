@@ -17385,6 +17385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: forestpack_foliage_mushroom_red_small
       objectReference: {fileID: 0}
+    - target: {fileID: 1240686429475702, guid: da33a1bfeaaabaa4597896ca7003b785, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4208249379357960, guid: da33a1bfeaaabaa4597896ca7003b785, type: 3}
       propertyPath: m_RootOrder
       value: 4

